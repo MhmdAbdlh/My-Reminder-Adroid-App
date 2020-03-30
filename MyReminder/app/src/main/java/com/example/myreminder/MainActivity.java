@@ -36,12 +36,18 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PopupMenu popup = new PopupMenu(MainActivity.this, view);
-                popup.getMenuInflater().inflate(R.menu.menu,popup.getMenu());
-                popup.show();
+//                PopupMenu popup = new PopupMenu(MainActivity.this, view);
+//                popup.getMenuInflater().inflate(R.menu.menu,popup.getMenu());
+//                popup.show();
+                openDialog();
             }
         });
 
 
+    }
+
+    public void openDialog() {
+        Edit_dialog dialog = new Edit_dialog();
+        dialog.show(getSupportFragmentManager(), "edit Reminder");
     }
 }
