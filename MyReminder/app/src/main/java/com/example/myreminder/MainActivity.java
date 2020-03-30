@@ -40,13 +40,11 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                PopupMenu popup = new PopupMenu(MainActivity.this, view);
-//                popup.getMenuInflater().inflate(R.menu.menu,popup.getMenu());
-//                popup.show();
-                openDialog();
+                PopupMenu popup = new PopupMenu(MainActivity.this, view);
+                popup.getMenuInflater().inflate(R.menu.menu,popup.getMenu());
+                popup.show();
             }
         });
-
     }
 
     @Override
@@ -59,8 +57,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected( MenuItem item) {
         switch (item.getItemId()){
-            case R.id.exit:
+            case R.id.exit: {
                 onDestroy();
+            }
+            case R.id.new_reminder: {
+                openDialog();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
