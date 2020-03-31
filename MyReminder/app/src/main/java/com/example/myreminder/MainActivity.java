@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +20,21 @@ import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
-
+    EditText reminderNameNew,reminderNameEdit;
+    CheckBox importantNew,importantEdit;
+    Button commitNew,commitEdit,cancelNew,cancelEdit;
+    RemindersDbAdapter reminderDbHelper;
     ListView listView;
-    RemindersDbAdapter reminderAdapter
+    RemindersDbAdapter reminderAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        reminderNameNew = (EditText) findViewById(R.id.new_reminder);
+        importantNew = (CheckBox) findViewById(R.id.newcheckBox);
+        commitNew = (Button) findViewById(R.id.newcommit);
+        cancelNew = (Button) findViewById(R.id.newcancel);
+
         setContentView(R.layout.activity_main);
         ListView list = findViewById(R.id.ReminderList);
         reminderAdapter = new RemindersDbAdapter(this);
@@ -60,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case(R.id.edit_reminder):{
                 //openDialog2 for editing
-                openDialog();
+                openDialogedit();
             }
             case(R.id.delete_reminder):{
-                reminderAdapter.deleteReminderById(item.);
+                //reminderAdapter.deleteReminderById(item.);
 
             }
 
@@ -88,15 +100,20 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             case R.id.new_reminder: {
-                openDialog();
+                openDialogNew();
                 return true;
             }
             default: return super.onOptionsItemSelected(item);
         }
     }
 
-    public void openDialog() {
-        Edit_dialog dialog = new Edit_dialog();
+    public void openDialogedit() {
+        Edit_reminder dialog = new Edit_reminder();
         dialog.show(getSupportFragmentManager(), "edit Reminder");
+    }
+
+    public void openDialogNew() {
+        new_reminder dialog = new new_reminder(reminderNameNew,importantNew,commitNew,cancelNew,reminderDbHelper);
+        dialog.show(getSupportFragmentManager(), "new Reminder");
     }
 }

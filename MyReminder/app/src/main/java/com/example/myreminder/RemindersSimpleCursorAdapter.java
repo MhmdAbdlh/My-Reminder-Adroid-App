@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import androidx.core.content.ContextCompat;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
+//import android.support.v4.content.ContextCompat;
+//import android.support.v4.widget.SimpleCursorAdapter;
+
+
 
 /**
  * Created by engMa_000 on 2017-04-03.
@@ -37,7 +41,7 @@ public class RemindersSimpleCursorAdapter extends SimpleCursorAdapter {
             view.setTag(holder);
         }
         if (cursor.getInt(holder.colImp) > 0) {
-            holder.listTab.setBackgroundColor(ContextCompat.getColor(context,R.color.orange));
+            holder.listTab.setBackgroundColor(ContextCompat.getColor(context, R.color.orange));
         } else {
             holder.listTab.setBackgroundColor(ContextCompat.getColor(context,R.color.green));
         }
@@ -50,4 +54,5 @@ public class RemindersSimpleCursorAdapter extends SimpleCursorAdapter {
     }
 
 }
+
 
