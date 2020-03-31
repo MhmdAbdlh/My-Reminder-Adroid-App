@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#004d40">
+
+
+    <EditText
+        android:id="@+id/new_reminder"
+        android:layout_width="336dp"
+        android:layout_height="88dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:autofillHints=""
+        android:background="#78909c"
+        android:hint="new reminder"/>
+
+    <CheckBox
+        android:id="@+id/newcheckBox"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="112dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:text="  important"
+        android:textColor="#ffffff"
+        android:buttonTint="#e81e62"/>
+
+    <Button
+        android:id="@+id/newcommit"
+        android:layout_width="156dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="189dp"
+        android:layout_marginLeft="189dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginBottom="10dp"
+        android:background="#e0e0e0"
+        android:text="commit"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/newcancel"
+        android:layout_width="152dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginBottom="10dp"
+        android:background="#e0e0e0"
+        android:text="cancel"
+        android:textColor="#ffffff" />
+
+
+</RelativeLayout>
