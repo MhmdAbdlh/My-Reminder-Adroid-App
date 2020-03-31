@@ -20,7 +20,7 @@ public class new_reminder extends AppCompatDialogFragment {
     Button commitNew,cancelNew;
     private EditText editTextAlarm;
 
-    new_reminder(EditText reminderNameNew, CheckBox importantNew, Button commitNew, Button cancelNew,RemindersDbAdapter reminderDbHelper) {
+    new_reminder(EditText reminderNameNew, CheckBox importantNew, Button  commitNew, Button  cancelNew,RemindersDbAdapter reminderDbHelper) {
         this.reminderNameNew = reminderNameNew;
         this.importantNew = importantNew;
         this.commitNew = commitNew;
