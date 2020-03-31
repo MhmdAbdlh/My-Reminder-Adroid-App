@@ -8,11 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
@@ -22,19 +18,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        //Cursor cursor = reminderAdapter.fetchAllReminders();
-        String [] names = new String [] {reminderAdapter.COL_CONTENT,reminderAdapter.COL_IMPORTANT};
-        int [] to_ids = new int [] {R.id.reminder, R.id.importance};
-        //myAdapter = new RemindersSimpleCursorAdapter(this, R.layout.listview_custom,cursor,names,to_ids,0 );
-        list = findViewById(R.id.ReminderList);
-        list.setAdapter(myAdapter);
-
         reminderAdapter = new RemindersDbAdapter(this);
         reminderAdapter.open();
-//        registerForContextMenu(list);
+        Cursor cursor = reminderAdapter.fetchAllReminders();
+        String [] names = new String [] {reminderAdapter.COL_CONTENT,reminderAdapter.COL_IMPORTANT};
+        int [] to_ids = new int [] {R.id.reminder, R.id.importance};
+        myAdapter = new RemindersSimpleCursorAdapter(this, R.layout.listview_custom,cursor,names,to_ids,0 );
+        list = findViewById(R.id.ReminderList);
+        list.setAdapter(myAdapter);
+        registerForContextMenu(list);
     }
 
     @Override
@@ -95,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public void update_mylist(){
         Cursor c = reminderAdapter.fetchAllReminders();
         myAdapter.changeCursor(c);
+        list.setAdapter(myAdapter);
     }
     public void openDialogedit() {
         Edit_reminder dialog = new Edit_reminder();

@@ -46,10 +46,11 @@ public class RemindersSimpleCursorAdapter extends SimpleCursorAdapter {
 
         String data = cursor.getString(holder.colContent);
         ((TextView)holder.contentTab).setText(data);
+        ((TextView)holder.listTab).setText(" ");
         if (cursor.getInt(holder.colImp) > 0) {
             holder.listTab.setBackgroundColor(ContextCompat.getColor(context, R.color.orange));
         } else {
-            holder.listTab.setBackgroundColor(ContextCompat.getColor(context,R.color.green));
+            holder.listTab.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
         }
 
     }
@@ -59,8 +60,8 @@ public class RemindersSimpleCursorAdapter extends SimpleCursorAdapter {
         Cursor c = getCursor();
         c.move(position);
         int id = c.getInt(0);
-        int imp = c.getInt(1);
-        String content = c.getString(2);
+        int imp = c.getInt(2);
+        String content = c.getString(1);
         Reminder to_ret = new Reminder(id,content,imp);
         return to_ret;
     }
