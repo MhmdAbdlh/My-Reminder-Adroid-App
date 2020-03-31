@@ -1,11 +1,9 @@
 package com.example.myreminder;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-
-import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,18 +11,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
+    RemindersDbAdapter reminderAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView list = findViewById(R.id.ReminderList);
+        reminderAdapter = new RemindersDbAdapter(this);
+        reminderAdapter.open();
+        Cursor cursor = reminderAdapter.fetchAllReminders();
+        String [] names = new String [] {reminderAdapter.COL_CONTENT,reminderAdapter.COL_IMPORTANT};
+        int [] to_ids = new int [] {R.id.reminder, R.id.importance};
+        RemindersSimpleCursorAdapter myAdapter = new RemindersSimpleCursorAdapter(this, R.layout.listview_custom,cursor,names,to_ids,0 );
+
         ArrayList <String> myList = new ArrayList <>();
         myList.add("reminder1");
         myList.add("reminder1");
@@ -36,15 +43,33 @@ public class MainActivity extends AppCompatActivity {
         myList.add("reminder1");
         myList.add("reminder1");
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,myList);
-        list.setAdapter(arrayAdapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PopupMenu popup = new PopupMenu(MainActivity.this, view);
-                popup.getMenuInflater().inflate(R.menu.menu,popup.getMenu());
-                popup.show();
+        list.setAdapter(myAdapter);
+        registerForContextMenu(list);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()){
+            case(R.id.edit_reminder):{
+                //openDialog2 for editing
+                openDialog();
             }
-        });
+            case(R.id.delete_reminder):{
+                reminderAdapter.deleteReminderById(item.);
+
+            }
+
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -58,13 +83,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected( MenuItem item) {
         switch (item.getItemId()){
             case R.id.exit: {
-                onDestroy();
+                this.finish();
+                System.exit(0);
+                return true;
             }
             case R.id.new_reminder: {
                 openDialog();
+                return true;
             }
+            default: return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void openDialog() {
