@@ -55,7 +55,7 @@ public class RemindersDbAdapter {
 
     //TODO implement the function createReminder() which take the name as the content of the reminder and boolean important...note that the id will be created for you automatically
     public void createReminder(String name, boolean important) {
-        System.out.println("now we are here");
+        //System.out.println("now we are here");
         ContentValues C = new ContentValues();
         C.put(COL_CONTENT, name);
         long I;

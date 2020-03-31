@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         //Cursor cursor = reminderAdapter.fetchAllReminders();
         String [] names = new String [] {reminderAdapter.COL_CONTENT,reminderAdapter.COL_IMPORTANT};
         int [] to_ids = new int [] {R.id.reminder, R.id.importance};
-        //myAdapter = new RemindersSimpleCursorAdapter(this, R.layout.listview_custom,cursor,names,to_ids,0 );
+        myAdapter = new RemindersSimpleCursorAdapter(this, R.layout.listview_custom,cursor,names,to_ids,0 );
         list = findViewById(R.id.ReminderList);
-        list.setAdapter(myAdapter);
+        //list.setAdapter(myAdapter);
 
         reminderAdapter = new RemindersDbAdapter(this);
         reminderAdapter.open();
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Reminder currentReminder = (Reminder) myAdapter.getItem(info.position);
+        //Reminder currentReminder = (Reminder) myAdapter.getItem(info.position);
         switch (item.getItemId()){
             case(R.id.edit_reminder):{
                 //openDialog2 for editing
@@ -89,15 +89,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         reminderAdapter.close();
         super.onDestroy();
-
     }
 
     public void update_mylist(){
         Cursor c = reminderAdapter.fetchAllReminders();
         myAdapter.changeCursor(c);
     }
+
     public void openDialogedit() {
-        Edit_reminder dialog = new Edit_reminder();
+        Edit_reminder dialog = new Edit_reminder(reminderAdapter);
         dialog.show(getSupportFragmentManager(), "edit Reminder");
     }
 

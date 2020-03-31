@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class new_reminder extends AppCompatDialogFragment implements View.OnClickListener {
+public class new_reminder extends AppCompatDialogFragment{
     RemindersDbAdapter DB;
     EditText reminderNameNew;
     CheckBox importantNew;
@@ -31,23 +31,23 @@ public class new_reminder extends AppCompatDialogFragment implements View.OnClic
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-
+        System.out.println("here");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        System.out.println("here");
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.newlayout, null);
-
+        System.out.println("here");
         builder.setView(view)
                 .setTitle("New Reminder");
         editTextAlarm = view.findViewById(R.id.new_reminder);
-
+        System.out.println("here");
         reminderNameNew = (EditText) view.findViewById(R.id.new_reminder);
         importantNew = (CheckBox) view.findViewById(R.id.newcheckBox);
         commitNew = (Button) view.findViewById(R.id.newcommit);
         cancelNew = (Button) view.findViewById(R.id.newcancel);
 
         AddData();
-
+        System.out.println("here");
         return builder.create();
     }
 
@@ -56,20 +56,14 @@ public class new_reminder extends AppCompatDialogFragment implements View.OnClic
             @Override
             public void onClick(View v) {
                 DB.createReminder(reminderNameNew.getText().toString(), importantNew.isChecked());
+                onDestroy();
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.newcommit:
-                DB.createReminder(reminderNameNew.getText().toString(), importantNew.isChecked());
-                break;
-            case R.id.newcancel:
-
-                break;
-        }
-
+        cancelNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDestroy();
+            }
+        });
     }
 }
