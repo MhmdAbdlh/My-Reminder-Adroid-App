@@ -5,8 +5,6 @@ package com.example.myreminder;
  */
 
 public class Reminder {
-
-
     private int mId;
     private String mContent;
     private int mImportant;

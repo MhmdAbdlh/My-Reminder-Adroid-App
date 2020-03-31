@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
@@ -29,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        reminderNameNew = (EditText) findViewById(R.id.new_reminder);
-        importantNew = (CheckBox) findViewById(R.id.newcheckBox);
-        commitNew = (Button) findViewById(R.id.newcommit);
-        cancelNew = (Button) findViewById(R.id.newcancel);
 
         setContentView(R.layout.activity_main);
         ListView list = findViewById(R.id.ReminderList);
@@ -72,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case(R.id.edit_reminder):{
                 //openDialog2 for editing
-                openDialogedit();
+                openDialogEdit();
             }
             case(R.id.delete_reminder):{
                 //reminderAdapter.deleteReminderById(item.);
@@ -107,13 +103,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openDialogedit() {
+    public void openDialogEdit() {
         Edit_reminder dialog = new Edit_reminder();
         dialog.show(getSupportFragmentManager(), "edit Reminder");
     }
 
     public void openDialogNew() {
-        new_reminder dialog = new new_reminder(reminderNameNew,importantNew,commitNew,cancelNew,reminderDbHelper);
+        new_reminder dialog = new new_reminder(reminderAdapter);
         dialog.show(getSupportFragmentManager(), "new Reminder");
     }
 }

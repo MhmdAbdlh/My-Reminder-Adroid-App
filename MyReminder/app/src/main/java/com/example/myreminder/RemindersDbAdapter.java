@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -54,6 +55,7 @@ public class RemindersDbAdapter {
 
     //TODO implement the function createReminder() which take the name as the content of the reminder and boolean important...note that the id will be created for you automatically
     public void createReminder(String name, boolean important) {
+        System.out.println("now we are here");
         ContentValues C = new ContentValues();
         C.put(COL_CONTENT, name);
         long I;
@@ -64,7 +66,11 @@ public class RemindersDbAdapter {
         C.put(COL_IMPORTANT, I);
         long res = mDb.insert(TABLE_NAME, null, C);
         if (res == -1) {
-            System.out.println("there was error in creating new reminder");
+            Toast.makeText(mCtx,"there was an error in inserting in the database",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(mCtx,"done",Toast.LENGTH_SHORT).show();
         }
     }
     //TODO overloaded to take a reminder
