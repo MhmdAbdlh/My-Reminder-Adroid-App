@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,6 @@ public class Edit_reminder extends AppCompatDialogFragment {
     Button commitEdit,cancelEdit;
     MainActivity a;
     Reminder r;
-    private EditText editTextAlarm;
 
     Edit_reminder(RemindersDbAdapter remindersDbAdapter, MainActivity a, Reminder R) {
         DB = remindersDbAdapter;
@@ -35,19 +35,19 @@ public class Edit_reminder extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.newlayout, null);
+        view.setBackgroundColor(0xff3d5afe);;
 
         builder.setView(view)
                 .setTitle("Edit Reminder");
-        editTextAlarm = view.findViewById(R.id.new_reminder);
-        editTextAlarm.setBackgroundColor(0x2962ff);
 
         reminderNameEdit = (EditText) view.findViewById(R.id.new_reminder);
         reminderNameEdit.setText(r.getContent());
         importantEdit = (CheckBox) view.findViewById(R.id.newcheckBox);
+        System.out.println(r.getImportant());
         if (r.getImportant() == 0)
-            importantEdit.setActivated(false);
+            importantEdit.setChecked(false);
         else
-            importantEdit.setActivated(true);
+            importantEdit.setChecked(true);
         commitEdit = (Button) view.findViewById(R.id.newcommit);
         cancelEdit = (Button) view.findViewById(R.id.newcancel);
 
@@ -62,8 +62,12 @@ public class Edit_reminder extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 //change it to update
+                if (reminderNameEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(a,"Can not insert an empty reminder",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 r.setContent(reminderNameEdit.getText().toString());
-                if (importantEdit.isActivated())
+                if (importantEdit.isChecked())
                     r.setImportant(1);
                 else
                     r.setImportant(0);

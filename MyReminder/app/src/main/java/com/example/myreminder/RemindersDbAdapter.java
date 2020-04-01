@@ -58,7 +58,7 @@ public class RemindersDbAdapter {
         //System.out.println("now we are here");
         ContentValues C = new ContentValues();
         C.put(COL_CONTENT, name);
-        long I;
+        int I;
         if (important)
             I=1;
         else

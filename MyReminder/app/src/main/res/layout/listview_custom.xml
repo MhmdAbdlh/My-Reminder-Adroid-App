@@ -8,12 +8,14 @@
 
     <TextView
         android:id="@+id/importance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="12dp"
+        android:layout_height="44dp"
         android:text=" "
+        android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
     <TextView
         android:id="@+id/reminder"
@@ -24,5 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/importance"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="35sp"/>
+        android:textSize="35dp"
+        android:textColor="#000000"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
             case(R.id.edit_reminder):{
                 //openDialog2 for editing
                 openDialogedit(currentReminder);
+                break;
             }
             case(R.id.delete_reminder):{
                 reminderAdapter.deleteReminderById(currentReminder.getId());
+                break;
             }
         }
         update_mylist();
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     public void update_mylist(){
         Cursor c = reminderAdapter.fetchAllReminders();
         myAdapter.changeCursor(c);
-        list.setAdapter(myAdapter);
+        //list.setAdapter(myAdapter);
     }
 
     public void openDialogedit(Reminder R) {

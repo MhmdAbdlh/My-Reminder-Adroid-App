@@ -58,7 +58,7 @@ public class RemindersSimpleCursorAdapter extends SimpleCursorAdapter {
     @Override
     public Object getItem(int position) {
         Cursor c = getCursor();
-        c.move(position);
+        c.moveToPosition(position);
         int id = c.getInt(0);
         int imp = c.getInt(2);
         String content = c.getString(1);

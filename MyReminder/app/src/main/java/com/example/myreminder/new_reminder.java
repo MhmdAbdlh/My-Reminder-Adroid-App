@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +51,10 @@ public class new_reminder extends AppCompatDialogFragment{
         commitNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (reminderNameNew.getText().toString().isEmpty()) {
+                    Toast.makeText(a,"Can not insert an empty reminder",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 DB.createReminder(reminderNameNew.getText().toString(), importantNew.isChecked());
                 a.update_mylist();
                 dismiss();
